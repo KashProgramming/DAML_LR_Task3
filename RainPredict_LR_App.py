@@ -26,7 +26,7 @@ pressure_9am = st.number_input("Pressure at 9am")
 pressure_3pm = st.number_input("Pressure at 3pm")
 temp_9am = st.number_input("Temperature at 9am")
 temp_3pm = st.number_input("Temperature at 3pm")
-rain_today = st.number_input("Rain Today?")
+rain_today = st.number_input("Rain Today?", value=0)
 risk_mm = st.number_input("RISK_MM")
 wind_gust_dir = st.selectbox("Wind Gust Direction", ["E", "ENE", "ESE", "N", "NE", "NNE", "NNW", "NW", "S", "SE", "SSE", "SSW", "W", "WNW", "WSW"])
 
@@ -57,7 +57,7 @@ if st.button("Predict Rain"):
     pca_input = pca.transform(scaled_input)
     # predicting price using scaled and transformed user input and developed model
     prediction = loaded_model.predict(pca_input)
-    if prediction == 1:
+    if prediction[0] == 1:
         st.success("It will rain tomorrow.")
-    elif prediction == 0:
+    else:
         st.success("It will not rain tomorrow.")
